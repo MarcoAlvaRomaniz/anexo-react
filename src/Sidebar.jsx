@@ -8,7 +8,7 @@ const Sidebar = ({isOpen, toggleSidebar, toggleAnexo}) =>{
         <div className={`sidebar ${isOpen ? 'open':'closed'}`}>
             <div className="sidebar-header">
                 
-                <button onClick={toggleSidebar}>
+                <button onClick={toggleSidebar} >
                     {isOpen ? 'Ocultar' : 'Mostrar'} 
                 </button>
             </div>
@@ -17,9 +17,9 @@ const Sidebar = ({isOpen, toggleSidebar, toggleAnexo}) =>{
                     {/**Elementos del menu */}
                     <ul className="list-menu">
                         <li>
-                            <button onClick={toggleAnexo}>
+                            <a onClick={toggleAnexo}>
                                 Anexos
-                            </button>
+                            </a>
                         </li>
                     </ul>
                 </div>

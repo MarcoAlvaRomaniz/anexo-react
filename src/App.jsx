@@ -16,7 +16,7 @@ function App() {
     setShowAnexo(!showAnexo);
   }
   return (
-    <div className = "App">
+    <div className="App">
       {/**Boton para mostrar el sidebar */}
       {!isOpen && (
         <button className = "toggle-button" onClick={toggleSidebar}>

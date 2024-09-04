@@ -1,16 +1,8 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
-.App{
-  display: flex;
-  width: 100%;
 
-  align-items: flex-start; /*Alinea los elementos a la parte superior*/
-
-}
 .list-menu{
   list-style: none;
 }
@@ -19,10 +11,12 @@
   width: 100%;
 
 }
-.list-menu li button{
+.list-menu li a{
   display: block;
   width: 100%;
-  border-bottom:1px solid chartreuse;
+  cursor: pointer;
+  border-bottom: 1px solid #fae20c;
+  color:#fae20c;
 }
 .toggle-button{
   position: absolute;
@@ -37,11 +31,8 @@
 }
 .content{
   transition: margin-left 0.3s ease;
-  
   margin-left: 0;
   width: 100%;
-
-
 }
 .content.shifted{
   margin-left: 250px;/*Ajusta el valor segun el sidebar*/

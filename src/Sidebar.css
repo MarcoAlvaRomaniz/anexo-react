@@ -8,6 +8,10 @@
     background-color: black;
     color:dimgrey;
     transition: transform 0.3s ease;
+    z-index: 1001;
+}
+.sidebar button{
+    color: azure;
 }
 .sidebar.closed{
     transform: translateX(-250px);/*Esto esconde el sidebar */
@@ -23,5 +27,5 @@
     text-align: right;
 }
 .sidebar-content{
-    padding: 1rem;
+    padding: 5px;
 }
