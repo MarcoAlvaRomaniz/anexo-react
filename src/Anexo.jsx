@@ -1,33 +1,41 @@
 //importacion de react
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { debounce } from 'lodash';
+
 import Swal from 'sweetalert2';
 import Detectores from './Detectores';
+import TablaAnexos from './TablaRegistros';
 import { MdDeleteForever } from "react-icons/md";
+
+import PDF from './components/PDF';
+
 
 const Anexo = () =>{
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [mostrarDetector,setMostrarDetector] = useState(false);
-    const [anexosList, setAnexos] = useState([]);
     const [isEdit,setIsEdit] = useState(false);
+    const [refresh,setRefresh] = useState(false);
     const [id,setId] = useState(false);
-    const [loading, setLoading]=useState(false);
+    const[isPdf,setIsPdf] = useState(false);
     //este estado va hacia los detectores
     const [detectoresList, setDetectoresList] = useState([]);
+
     const [anexo, setAnexo] = useState({
         cotizacion:'',
-        condiciones:'',
-        razonSocial1:'',
-        fechaAnexo:'',
-        modeloMonitor:''
+        razonSocial1:''
     });
+    
     const handleDeleteDetector =(indexDet)=>{
         //metodo splice que elimina el index y lo recorre uno
         const filtro = detectoresList.filter((_,index)=>index!=indexDet)
         //agregar filtro en el setDetectorlist
         setDetectoresList(filtro);
     }
+    const resetearFormulario = ()=>{
+        setDetectoresList([]);
+        setAnexo({});
+    }
+
     const editar1 = async(id)=>{
         try{
             const {data} = await axios.get(`http://localhost:3000/api/v1/anexos/${id}`)
@@ -42,16 +50,15 @@ const Anexo = () =>{
         }catch(error){console.error(error)}
     }
     const toggleDetector = () =>{
+        if(detectoresList.length>2){
+            Swal.fire(
+                "Atencion","No se permiten mas de 3 detectores","warning"                
+            )
+            return;
+        }
        setMostrarDetector(!mostrarDetector);
-       if(mostrarDetector === true){
-        let txtDetector = "ocultar"
-       }else{
-        let txtDetector = "+"
-       }
     }
-    useEffect(()=>{
-    getAnexos();
-    },[]);
+    
     const addDetector=(nvoDetector)=>{
         setDetectoresList([...detectoresList,nvoDetector])
         setMostrarDetector(false);
@@ -72,17 +79,17 @@ const Anexo = () =>{
                     icon:'success',
                     timer:1000
                 });
-                getAnexos();
-                limpiarCampos();
+                setRefresh(!refresh);
                 setMostrarFormulario(false);
+                limpiarCampos();
+                
             });
         }else{
             alert("por favor ingrese el campo de cotizacion");
         }
     };
     const update=()=>{
-        setIsEdit(false)
-        
+        setIsEdit(false)        
         if(anexo.cotizacion){
             axios.patch(`http://localhost:3000/api/v1/anexos/${id}`,{...anexo,detectores:detectoresList})
             .then(()=>{
@@ -92,45 +99,30 @@ const Anexo = () =>{
                     icon:'success',
                     timer:1000
                 });
-                getAnexos();
                 limpiarCampos();
-                setMostrarFormulario(false);
+                setMostrarFormulario(false);    
+                console.log(mostrarFormulario);
+                setRefresh(!refresh);
+
             }).catch((error)=>{
                 console.error("Error al actualiza el anexo",error);
             })
         }else{
             limpiarCampos();
-            getAnexos();
             alert("Por favor verifique los campos necesarios");
 
         }
     };
     const limpiarCampos = () =>{
         setMostrarFormulario(false);
+        resetearFormulario([]);
     };
     const editarAnexo = (val) => {
        
         setAnexo(val);
         setMostrarFormulario(true);
     };
-    const getAnexos = debounce(()=>{
-        setLoading(true);
-        axios.get("http://localhost:3000/api/v1/anexos/")
-        .then((response)=>{
-            
-            const data = response.data.data;
-            console.log("consulta de anexos")
-            console.log(data);
-            if(Array.isArray(data)){
-                console.log("si fue un arreglo")
-                setAnexos(data);
-            }
-            setLoading(false);
-        }).catch((error)=>{
-            setLoading(false);
-            console.error("Error al obtener los anexos",error);
-        })
-    },200);
+    
 
     return(
         <div>
@@ -214,6 +206,9 @@ const Anexo = () =>{
                         <span className="input-group-text btn btn-warning">Dirección</span>
                         <textarea
                         className="form-control"
+                        name="direccion1"
+                        onChange={handleChange}
+                        value = {anexo.direccion1}
                         ></textarea>
                     </div>
                     <h5>
@@ -242,6 +237,7 @@ const Anexo = () =>{
                         <input
                             type="text"
                             name="periodo"
+                            onChange={handleChange}
                             className="form-control"
                             placeholder='Escriba el periodo'
                             aria-label = "periodo"
@@ -355,6 +351,20 @@ const Anexo = () =>{
                         <option value ="si">Si</option>
                         <option value="no">No</option>
                         </select>
+                    </div>                    
+                    <div className="input-group">
+                        <span className="input-group-text bg-yellow-500">
+                            Descripción
+                        </span>
+                        <textarea
+                            className="form-control"
+                            placeholder='Ingrese la Descripción de la declaración de la conformidad y norma de referencia.'
+
+                            name="descripcion"
+                            onChange={handleChange}
+                            value={anexo.descripcion}
+                        ></textarea>
+
                     </div>
                     <div className="input-group">
                         <span className="input-group-text btn btn-warning">Norma de referencia</span>
@@ -362,6 +372,7 @@ const Anexo = () =>{
                             className = "form-control"
                             placeholder='Escriba la norma de referencia'
                             name="norma"
+                            onChange={handleChange}
                             aria-label='norma'
                             aria-describedby='norma'
                             value={anexo.norma}
@@ -378,7 +389,7 @@ const Anexo = () =>{
                             name="razoSocial2"
                             aria-label='razonSocial2'
                             onChange={handleChange}
-                            value={anexo.razonSocial2}
+                            value={anexo.razoSocial2}
                         />
                     </div>
                     <div className="input-group">
@@ -389,6 +400,19 @@ const Anexo = () =>{
                             onChange={handleChange}
                             value={anexo.direccion2}
                         ></textarea>
+                    </div>
+                    <div className="input-group">
+                        <span className="input-group-text btn btn-warning">Ajuste</span>
+                        <select
+                            className="form-control"
+                            name="ajuste"
+                            onChange={handleChange}
+                            value={anexo.ajuste}
+                        >
+                            <option value="">selecciones una opción</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
                     <div className="input-group">
                         <span className="input-group-text btn btn-warning" id="contacto">Atención a</span>
@@ -453,56 +477,10 @@ const Anexo = () =>{
 
             )}
             {/**Listar anexos */}
-            {loading ? <p>Cargando registros....</p>:(
-                <div className="bitacora  ">
-                    <table className="table  caption-top table-responsive table-striped">
-                        <caption>Registros de Anexos</caption>
-                        <thead className="encabezado">
-                            <tr>
-                                <th scope="col">
-                                    Cotización
-                                </th>
-                                <th scope="col">
-                                    Fecha
-                                </th>
-                                <th scope="col">
-                                    Cliente
-                                </th>
-                                <th scope="col">Marca</th>
-                                <th scope="col">Modelo</th>
-                                <th scope="col">Serie</th>
-                                <th scope="col">Acciones</th> 
-                            </tr>
-                                                  
-                        </thead>
-                        <tbody>
-                            {anexosList.map((val)=>(
-                                <tr key={val.id}>
-                                    <td>{val.cotizacion}</td>
-                                    <td>{val.fecha}</td>
-                                    <td>{val.razonSocial}</td>
-                                    <td>{val.marcaMonitor}</td>
-                                    <td>{val.modeloMonitor}</td>
-                                    <td>{val.serieMonitor}</td>
-                                    <td>
-                                        <div>
-                                            <button className="btn btn-info"
-                                                type="button"
-
-                                                onClick={()=>editar1(val.id)}
-                                            >
-                                                editar
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-
-                    </table>
-                    
-                </div>
-            )}
+            <TablaAnexos editar1={editar1} refresh={refresh}/>
+            <div>
+            </div>
+            
         </div>
     );
 };
