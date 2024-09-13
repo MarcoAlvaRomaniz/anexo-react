@@ -7,8 +7,8 @@ import {
     View,
     Link,
 } from '@react-pdf/renderer'
-import logo from '../components/EncabezadoAnexo.png';
-import footer from '../components/Pie.png';
+import logo from './../../assets/EncabezadoAnexo.png';
+import footer from './../../assets/Pie.png';
 
 const numeroPagina = (pageNumber, totalPage)=>{
 

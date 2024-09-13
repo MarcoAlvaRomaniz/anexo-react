@@ -9,6 +9,7 @@ function Detectores(promps){
 const {detectoresList, addDetector} = promps
 const [loading, setLoading] = useState(false);
 
+
 const [tipo,setTipo] = useState("");
 const [marca,setMarca] = useState("");
 const [modelo,setModelo] = useState("");

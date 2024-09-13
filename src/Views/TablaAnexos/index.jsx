@@ -1,19 +1,29 @@
 
 import { debounce } from 'lodash';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { pdf, PDFDownloadLink } from '@react-pdf/renderer';
 import { FaFilePdf } from "react-icons/fa6";
-import PDF from './components/PDF';
-import {server} from './db/server.js';
+import PDF from './../../components/Pdf';
+import {server} from './../../db/server';
+import './styles.css';
+import { LuFileEdit } from "react-icons/lu";
+
 
 
 export default function TablaAnexos(promps){
     const [anexos, setAnexos] = useState([]);
     const [loading, setLoading]=useState(false);
     const [anexosFiltrados,setAnexosFiltrados] = useState([]);
-    const {editar1, refresh} = promps
+    const {editar1, refresh} = promps;
+    const navegador = useNavigate();
 
+    const handleEdit = (id)=>{
+        
+        navegador(`/formulario-anexo/${id}`)
+
+    }
     useEffect(()=>{
         console.log(refresh)
         getAnexos();
@@ -120,15 +130,15 @@ const getAnexos = debounce(()=>{
                                 <td>{anexo.modelo}</td>
                                 <td>{anexo.serieMonitor}</td>
                                 <td>
-                                    <div>
-                                        <button className="btn btn-info"
+                                    <div className="flex justify-normal">
+                                        <button className="text-blue-900 text-[20px] cursor-pointer p-2"
                                             type="button"
 
-                                            onClick={()=>editar1(anexo.id)}
+                                            onClick={()=>handleEdit(anexo.id)}
                                         >
-                                            editar
+                                            <LuFileEdit />
                                         </button>
-                                        <button className="text-red-600 block text-[20px] justify-center cursor-pointer "
+                                        <button className="text-red-600 block text-[20px] justify-center cursor-pointer p-2"
                                             onClick={()=>abrePDF(anexo.id)}
                                         >
                                             <FaFilePdf />

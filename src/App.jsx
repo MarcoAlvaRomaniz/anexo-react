@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import Sidebar from './Sidebar';
 import Anexo from './Anexo';
 import './App.css';
+import AnexoForm from './Paginas/AnexoFormulario';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';  
+
 
 function App() {
   const [isOpen,setIsOpen] =  useState(false);
@@ -16,7 +19,10 @@ function App() {
     setShowAnexo(!showAnexo);
   }
   return (
-    <div className="App">
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={
+          <div className="App">
       {/**Boton para mostrar el sidebar */}
       {!isOpen && (
         <button className = "toggle-button" onClick={toggleSidebar}>
@@ -27,11 +33,17 @@ function App() {
 
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} toggleAnexo={toggleAnexo}/>
       <div className={`content ${isOpen ? 'shifted':''}`}>
-        <h3>Servicios Integrales para la Radiación</h3>
+        <h3 className="text-lg text-red-700">Servicios Integrales para la Radiación</h3>
         {showAnexo && <Anexo />}
       </div>
       
     </div>
+
+        }/>
+        <Route path='/anexoForm' element={<AnexoForm/>}/>
+      </Routes>
+    </BrowserRouter>
+    
   )
 }
 

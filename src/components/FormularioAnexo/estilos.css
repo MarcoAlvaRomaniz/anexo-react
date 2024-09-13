@@ -1,0 +1,11 @@
+.formulario-anexo{
+    display: block;
+    width: 90%;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid #f4f4f4;
+    box-shadow: 1px 2px 2px #ccc;
+}
+.parrafo{
+    text-align: justify;
+}
