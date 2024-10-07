@@ -24,6 +24,13 @@ const styles = StyleSheet.create({
     section:{
         marginBottom:5,
     },
+    section4:{
+      backgroundColor:'#f4f4f4',
+      padding:'2px',
+    },
+    titulo10:{
+      textAlign:'center',
+    },
     fecha:{
       textAlign:'rigth',
     },
@@ -31,8 +38,6 @@ const styles = StyleSheet.create({
         fontSize:10,
         marginBottom:11,
         fontWeight:700,
-
-
     },
     subtitle:{
         fontSize:10,
@@ -57,6 +62,20 @@ const styles = StyleSheet.create({
       textAlign:'center',
       padding:1,
       fontSize:8,
+    },
+    
+    tableCell2:{
+      flex:1,
+      textAlign:'center',
+      padding:'0.5px',
+      fontSize:7,
+      border:'0.3px solid #c6c6c6',
+    },
+    tableCell3:{
+      flex:2,
+      textAlign:'left',
+      padding:'0.3 px',
+      fontSize:7,
     },
     title2:{
         fontSize:12,
@@ -298,8 +317,60 @@ const PDF = ({ anexo, detectoresList }) => (
         <Text style={styles.subtitle}>
           Notas
         </Text>
-        <Text><Text style={styles.respuestas}>{anexo.notas || 'No se han agregado notas adicionales'}</Text></Text>
-      </View>   
+        <Text style={styles.respuestas}>{anexo.notas || 'No se han agregado notas adicionales'}</Text>
+      </View>
+       
+
+      <View style={styles.section4}>
+        <Text style={styles.titulo10}>
+          Uso exclusivo para Servicios Integrales para la Radiación
+        </Text>
+        <View style={styles.tableRow}>
+          <Text style={styles.tableCell3}>
+          Personal suficiente y capacitado para realizar el trabajo 
+          </Text>
+          <Text style={styles.tableCell2}>
+            Si
+          </Text>
+          <Text style={styles.tableCell2}>
+            No
+          </Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text style={styles.tableCell3}>
+          Equipamiento necesario para la realización del servicio solicitado
+          </Text>
+          <Text style={styles.tableCell2}>
+          Si
+          </Text>
+          <Text style={styles.tableCell2}>
+          No
+          </Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text style={styles.tableCell3}>
+          Aplicación del método de calibración seleccionado
+          </Text>
+          <Text style={styles.tableCell2}>
+          Si
+          </Text>
+          <Text style={styles.tableCell2}>
+          No
+          </Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text style={styles.tableCell3}>
+          Cumplimiento del tiempo de entrega de resultados
+          </Text>
+          <Text style={styles.tableCell2}>
+          Si
+          </Text>
+          <Text style={styles.tableCell2}>
+          No
+          </Text>
+        </View>
+                   
+      </View>
       <View style={styles.footer}>
         <View style={styles.section3}>
           <Text render={({pageNumber, totalPages})=>`Página ${pageNumber} de ${totalPages}`} style={styles.textIzquierda}/>

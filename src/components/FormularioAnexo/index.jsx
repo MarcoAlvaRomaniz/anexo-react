@@ -446,6 +446,15 @@ export default function FormularioAnexo(){
                 value={anexo.notas}
             />
         </div>
+        <div>
+            <h5>
+                Revisión de la capacidad del laboratorio para la realización del servicio
+            </h5>
+            <div>
+                Para brindar el servicio, el laboratorio cuenta con:
+            </div>
+            
+        </div>
         <h5 className="font-bold">
             Condiciones de servicio
         </h5>
