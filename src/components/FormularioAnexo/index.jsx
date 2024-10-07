@@ -290,7 +290,7 @@ export default function FormularioAnexo(){
                 <button className="btn btn-success"
                     onClick={toggleDetector}
                 >
-                    {mostrarDetector? 'Ocultar':'+'}
+                    {mostrarDetector? 'Ocultar':'Agregar Detector'}
                 </button>                    
                 </div>
                 {mostrarDetector && (
@@ -471,6 +471,9 @@ export default function FormularioAnexo(){
                 </li>
                 <li>    
                     El Laboratorio calibrará el equipo del cliente en los intervalos que estén dentro de nuestro alcance y de los que el equipo permita dependiendo de su funcionamiento y en caso de no calibrar algún intervalo, se emitirá una carta indicando el motivo del porque no se calibró dicho intervalo.
+                </li>
+                <li>
+                    El ajuste no es intrínseco de la calibración, si el equipo lo requiere y permite, el laboratorio lo realizará siempre y cuando cuente con el software adecuado.
                 </li>
             </ul>
         </div>

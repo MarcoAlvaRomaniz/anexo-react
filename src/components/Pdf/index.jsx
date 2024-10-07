@@ -185,15 +185,15 @@ const PDF = ({ anexo, detectoresList }) => (
       <View style={styles.section}>
         <Text style={styles.subtitle}>INFORMACIÓN GENERAL Y TÉCNICA DE LA CALIBRACIÓN</Text>
         <Text style={styles.parrafo}>
-          La norma NOM-012-NUCL, nos indica en el punto 4.2 que la calibración de los instrumentos de medición de radiación ionizante, de medición de contaminación superficial y los dosimetros de lectura directa, debe efectuarse por lo menos una vez al año, salvo que en otras Normas Oficiales Mexicanas y demás disposiciones aplicables en la materia se establezca una periodicidad menor.
+          La norma NOM-012-NUCL, nos indica en el punto 4.2 que la calibración de los instrumentos de medición de radiación ionizante, de medición de contaminación superficial y los dosímetros de lectura directa, debe efectuarse por lo menos una vez al año, salvo que en otras Normas Oficiales Mexicanas y demás disposiciones aplicables en la materia se establezca una periodicidad menor.
         </Text>
         <Text style={styles.parrafo}>
-          El cliente requiere que en el certificado y etiqueta aparezca la fecha de la próxima calibración recomendada, la respuesta fué:  <Text style={styles.respuestas}>{anexo.proxima}</Text>.
+          El cliente requiere que en el certificado y etiqueta aparezca la fecha de la próxima calibración recomendada, la respuesta fue:  <Text style={styles.respuestas}>{anexo.proxima}</Text>.
         </Text>
         <Text style={styles.parrafo}>
           En caso de que el periodo sea diferente a la recomendada, favor de indicarlo.  <Text style={styles.respuestas}>{anexo.periodo}</Text>.          
         </Text>
-        <Text style={styles.parrafo}>El cliente con esta cotización autoriza la calibración de los intervalos de su equipo, que esten dentro del alcance del laboratorio.</Text>
+        <Text style={styles.parrafo}>El cliente con esta cotización autoriza la calibración de los intervalos de su equipo, que estén dentro del alcance del laboratorio.</Text>
       </View>
       <View style={styles.section}>
         <Text style={styles.subtitle}>Monitor</Text>
@@ -261,7 +261,7 @@ const PDF = ({ anexo, detectoresList }) => (
         <Text style={styles.subtitle}>
           Dirección de entrega
         </Text>
-        <Text>Rasón Social: <Text style={styles.respuestas}>{anexo.razoSocial2 || ' Sin Datos'}</Text></Text>
+        <Text>Razón Social: <Text style={styles.respuestas}>{anexo.razoSocial2 || ' Sin Datos'}</Text></Text>
         <Text>Dirección: <Text style={styles.respuestas}>{anexo.direccion2 || ' No se proporcionó una dirección'}</Text></Text>        
       </View>
       <View style={styles.section}>
@@ -272,16 +272,16 @@ const PDF = ({ anexo, detectoresList }) => (
             El servicio de calibración incluye la entrega del certificado y el análisis de Incertidumbre de Medida de la Calibración.
         </Text>
         <Text style={styles.parrafo}>
-           El Intervalo de Medida de la Calibración es de acuerdo a la deﬁnición NMX-Z-055 vigente.
+           El Intervalo de Medida de la Calibración es de acuerdo a la definición NMX-Z-055 vigente.
         </Text>
         <Text style={styles.parrafo}>
-          Calibración: Es la “Operación que establece, bajo las condiciones especiﬁcadas, en una primera etapa, una relación entre los valores y las    incertidumbres de medición provistas por patrones y las indicaciones correspondientes con las incertidumbres asociadas; en una segunda etapa,     utiliza ésta información para establecer una relación buscando la obtención de un resultado de medición a partir de una indicación”.
+          Calibración: Es la “Operación que establece, bajo las condiciones especificadas, en una primera etapa, una relación entre los valores y las incertidumbres de medición provistas por patrones y las indicaciones correspondientes con las incertidumbres asociadas; en una segunda etapa, utiliza esta información para establecer una relación buscando la obtención de un resultado de medición a partir de una indicación”.
         </Text>
         <Text style={styles.parrafo}>
           El Laboratorio calibrará el equipo del cliente en los intervalos que estén dentro de nuestro alcance y de los que el equipo permita dependiendo de su funcionamiento y en caso de no calibrar algún intervalo, se emitirá una carta indicando el motivo del porque no se calibró dicho intervalo.
         </Text>
         <Text style={styles.parrafo}>
-          El ajuste no es intrínseco de la calibración, si el equipo lo requiere y permite, el laboratorio lo realizará siempre y cuando cuente con el sotfware adecuado.
+          El ajuste no es intrínseco de la calibración, si el equipo lo requiere y permite, el laboratorio lo realizará siempre y cuando cuente con el software adecuado.
         </Text>
         <Text>  EN CASO DE QUE APLIQUE, ¿AUTORIZA EL AJUSTE?:    <Text style={styles.respuestas}>{anexo.ajuste || 'Dato no proporcionado'}</Text></Text>
       </View>
