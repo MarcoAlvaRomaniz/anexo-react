@@ -59,7 +59,7 @@ const filtrar = (palabra) => {
             const url = URL.createObjectURL(pdfBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `anexo_${selectedAnexo.cotizacion}.pdf`;
+            link.download = `anexo_${selectedAnexo.razonSocial}_${selectedAnexo.serieMonitor}.pdf`;
             link.click();
             URL.revokeObjectURL(url);
         }
@@ -131,13 +131,13 @@ const getAnexos = debounce(()=>{
                                 <td>{anexo.serieMonitor}</td>
                                 <td>
                                     <div className="flex justify-normal">
-                                        <button className="text-blue-900 text-[20px] cursor-pointer p-2"
+                                        {/* <button className="text-blue-900 text-[20px] cursor-pointer p-2"
                                             type="button"
 
                                             onClick={()=>handleEdit(anexo.id)}
                                         >
                                             <LuFileEdit />
-                                        </button>
+                                        </button> */}
                                         <button className="text-red-600 block text-[20px] justify-center cursor-pointer p-2"
                                             onClick={()=>abrePDF(anexo.id)}
                                         >

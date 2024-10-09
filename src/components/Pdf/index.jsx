@@ -1,4 +1,6 @@
+import { FaRegSquare } from "react-icons/fa";
 import {
+
     Document,
     Text,
     Page,
@@ -69,7 +71,22 @@ const styles = StyleSheet.create({
       textAlign:'center',
       padding:'0.5px',
       fontSize:7,
-      border:'0.3px solid #c6c6c6',
+    },
+    cuadrito:{
+      border:"2px solid #000",
+      display:"block",
+      width:"10px",
+      height:"10px",
+      textAlign:'center',
+      marginLeft:'5px',
+    },
+    
+    cuadrito2:{
+      display:"block",
+      textAlign:'center',
+      marginLeft:'5px',
+      width:"11px",
+      height:"15px",
     },
     tableCell3:{
       flex:2,
@@ -262,7 +279,10 @@ const PDF = ({ anexo, detectoresList }) => (
           Dirección de entrega
         </Text>
         <Text>Razón Social: <Text style={styles.respuestas}>{anexo.razoSocial2 || ' Sin Datos'}</Text></Text>
-        <Text>Dirección: <Text style={styles.respuestas}>{anexo.direccion2 || ' No se proporcionó una dirección'}</Text></Text>        
+        <Text>Dirección: <Text style={styles.respuestas}>{anexo.direccion2 || ' No se proporcionó una dirección'}</Text></Text>    
+        <Text>
+          Atención a: <Text style={styles.respuestas}>{anexo.contacto || 'S/D'}</Text> Telefono:<Text style={styles.respuestas}>{anexo.telefono || 'S/D'}</Text>
+        </Text>    
       </View>
       <View style={styles.section}>
       <Text style={styles.subtitle}>
@@ -327,25 +347,25 @@ const PDF = ({ anexo, detectoresList }) => (
         </Text>
         <View style={styles.tableRow}>
           <Text style={styles.tableCell3}>
-          Personal suficiente y capacitado para realizar el trabajo 
-          </Text>
+          Personal suficiente y capacitado para realizar el trabajo                       
+          </Text> 
           <Text style={styles.tableCell2}>
-            Si
-          </Text>
+          Si
+          </Text>                             
           <Text style={styles.tableCell2}>
-            No
+          No
           </Text>
         </View>
         <View style={styles.tableRow}>
           <Text style={styles.tableCell3}>
-          Equipamiento necesario para la realización del servicio solicitado
+          Equipamiento necesario para la realización del servicio solicitado            
           </Text>
           <Text style={styles.tableCell2}>
           Si
-          </Text>
+          </Text>                             
           <Text style={styles.tableCell2}>
           No
-          </Text>
+          </Text>  
         </View>
         <View style={styles.tableRow}>
           <Text style={styles.tableCell3}>
@@ -353,21 +373,20 @@ const PDF = ({ anexo, detectoresList }) => (
           </Text>
           <Text style={styles.tableCell2}>
           Si
-          </Text>
+          </Text>                             
           <Text style={styles.tableCell2}>
           No
-          </Text>
+          </Text>  
         </View>
         <View style={styles.tableRow}>
           <Text style={styles.tableCell3}>
           Cumplimiento del tiempo de entrega de resultados
-          </Text>
-          <Text style={styles.tableCell2}>
+          </Text><Text style={styles.tableCell2}>
           Si
-          </Text>
+          </Text>                             
           <Text style={styles.tableCell2}>
           No
-          </Text>
+          </Text>  
         </View>
                    
       </View>
